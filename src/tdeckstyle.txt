@@ -1,0 +1,56 @@
+<div className="test-deck-div" style={testDeckStyle}>
+        <div className="test_deck_div_title">
+          TEST DECK
+        </div>
+          <div className="testing_options">
+            <div className="testing_option">
+              RANDOMIZE ORDER
+            </div>
+            <div className="testing_option">
+              TEST HIRAGANA READING
+            </div>
+            <div className="testing_option">
+              TEST DEFINITION
+            </div>
+            <div className="testing_option">
+              TEST KANJI READING
+            </div>
+          </div>
+          <div className="test_container">
+            <div className="test_question">
+              <div className="test_question_kanji">
+                {/* Insert Hiragana Here */}
+              </div>
+              <div className="test_question_hiragana">
+                {/* Insert Kanji Here */}
+              </div>
+              <div className="test_question_definition">
+                {/* Insert Kanji Here */}
+              </div>
+            </div>
+
+            <div className="test_answers">
+              <div className="test_answer_1">
+                ?
+              </div>
+              <div className="test_answer_2">
+                ?
+              </div>
+              <div className="test_answer_3">
+                ?
+              </div>
+              <div className="test_answer_4">
+                ?
+              </div>
+          </div>
+          
+          <div className="score">
+            Score: 0/0
+          </div>
+          <div className='percentage'>
+            0%
+          </div>
+          <div className='howGood'>
+            Kan Masu!
+          </div>
+        </div>

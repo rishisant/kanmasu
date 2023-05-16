@@ -1,0 +1,341 @@
+/*
+  APP.CSS -> CSS GLOBAL
+  AUTHOR: @santanammu (duhhh)
+  DATE: 15 MAY 2023 (also duhhh)
+*/
+
+/* IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Klee+One&display=swap');
+
+/* BODY STYLE */
+body {
+  /* Add the background here, RISHISAN */
+  background-image: url('./img/kanmasu_BG.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  /* Now use your incredible skills of understanding code to do the rest... 8) */
+  font-family: 'Klee One', cursive;
+}
+
+/* WHITE BG BOX WITH BLACK TEXT */
+/* FOR DEBUG/DISPLAY PURPOSES */
+.white-bg {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 10em;
+}
+
+/* TOP DIV */
+.topdiv {
+  /* Haha, I get it. Top Div? Like the best one? Or the one on top... Sigh... */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em;
+
+  /* Now, let's make it #efefef background with a small drop shadow */
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+
+  /* Now, let's add a slight margin to the left and right, using em */
+  margin-left: 1em;
+  margin-right: 1em;
+
+  /* Let's do that for the top, shall we? */
+  margin-top: 1em;
+
+  /* And the bottom... Sure */
+  margin-bottom: 3em;
+
+  /* Okay, let's be cool and add a border-radius too. */
+  border-radius: 2em;
+}
+
+/* CLICKABLE BUTTON */
+.clickable_button {
+  /* Let's use the same background and box-shadow idea with a similar border-radius. */
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  border-radius: 2em;
+  padding: 1em;
+  font-size: 1.5em;
+  min-width: 3em;
+
+  font-family: 'Klee One', cursive;
+}
+
+/* THE JAPANESE TEXT FOR THE CLICKABLE BUTTONS */
+.button_text_JP {
+  /* Let's make this text larger with a text shadow around it... */
+  font-size: 3em;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
+
+  /* And heck, why not center this thing? */
+  text-align: center;
+
+  /* Alright, let's make this a bit cleaner. A tiny margin-bottom, でしょう？ */
+  margin-bottom: 0.25em;
+}
+
+/* HOVER SUPPORT */
+.clickable_button:hover {
+  /* Let's make this a dark grey, with a white text color */
+  background-color: #333333;
+  color: white;
+
+  /* And plus, people want to know their button is clickable. Let's add a hover. */
+  cursor: pointer;
+}
+
+/* CREATE CARD DIV */
+.create-card-div {
+  /* Adding base styles... */
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 0.5em;
+  padding: 1em;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Now, let's get fancy, add some margins and make this thing smaller... */
+  margin-left: 30%;
+  margin-right: 30%;
+
+  /* Make the font size pretty large too... */
+  font-size: 2em;
+
+  /* And use the font... */
+  font-family: 'Klee One', cursive;
+}
+
+/* CREATE CARD DIV HELPERS */
+.create_card_div_title {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5em;
+  font-family: 'Klee One', cursive;
+}
+
+.input-container label {
+  margin: 0.5em 0;
+}
+
+.input-container input[type="text"] {
+  /* For text input... */
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.25em;
+  font-family: 'Klee One', cursive;
+}
+
+.buttons-container {
+  /* Basic stuff... */
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 1.75em;
+
+  /* Just because I'm weird... Right? */
+  font-size: .75em;
+}
+
+/* CARD PREVIEWS */
+.preview-card-div {
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 0.5em;
+  padding: 1em;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  /* Make it a rectangular card, that has the same width and height, regardless */
+  width: 25%;
+  min-height: 200px;
+
+  /* Center it in the middle of the page... */
+  margin-left: auto; 
+  margin-right: auto;
+  
+  /* Now, a margin bottom */
+  margin-bottom: 1em;
+}
+
+.card-kanji {
+  font-size: 4em;
+  margin-top: 0.5em;
+  margin-bottom: 0.6em;
+  font-weight: bold;
+
+  /* Center */
+  text-align: center;
+}
+
+.card-hiragana, .card-romaji {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+
+  /* Center */
+  text-align: center;
+}
+
+.card-definition {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+
+  /* Center */
+  text-align: center;
+
+  /* Put it in the middle of the div vertically */
+  margin-top: 2em;
+}
+
+/* FOR VIEW ALL CARDS */
+.view-all-cards-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  margin: 1em;
+
+  /* Let's add the necessary backgrounds... */
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 0.5em;
+
+  /* Let's make this thing smaller... */
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.view_all_cards_div_title {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.view_all_cards_div_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 2em;
+}
+
+/* FOR TESTING KANJI */
+.testing_options {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.testing_option {
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.testing_option:hover {
+  background-color: #e0e0e0;
+}
+
+.testing_option:disabled {
+  background-color: #d0d0d0;
+  cursor: not-allowed;
+}
+
+.maindiv {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  padding: 1em;
+  margin: 1em;
+
+  /* Let's add the necessary backgrounds... */
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 0.5em;
+
+  /* Let's make this thing smaller... */
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.main-div-title {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: .5em;
+  text-align: center;
+}
+
+.main-div-content {
+  font-size: 2em;
+  /* align to left */
+  text-align: left;
+  margin: 1em;
+}
+
+/* CLICKABLE BUTTON 2 */
+.clickable_button_2 {
+  /* Let's use the same background and box-shadow idea with a similar border-radius. */
+  background-color: #efefef;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  border-radius: 2em;
+  padding: 1em;
+  font-size: 0.8em;
+  min-width: 150px;
+  height: 150px;
+
+  font-family: 'Klee One', cursive;
+  margin-right: 1.5em;
+}
+
+.button_text_JP_2 {
+  /* Let's make this text larger with a text shadow around it... */
+  font-size: 2em;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.75);
+
+  /* And heck, why not center this thing? */
+  text-align: center;
+  margin-top: 0.5em;
+
+  /* Alright, let's make this a bit cleaner. A tiny margin-bottom, でしょう？ */
+  margin-bottom: 0.25em;
+}
+
+.spacer {
+  margin-bottom: 2em;
+}
+
+.main-div-example {
+  flex-direction: row;
+  display: flex;
+  margin-bottom: 2em;
+}
