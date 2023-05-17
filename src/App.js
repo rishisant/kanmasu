@@ -460,6 +460,23 @@ function App() {
                 <div className="view_all_cards_div_title">
                     VIEW ALL CARDS
                 </div>
+                {cards.length === 0 && (<div className="main-div-content">
+                    You still haven't made any cards yet. So, why not make one now? Time is ticking!
+                    Or, at least it would be if this application had a timer. But it doesn't. So, you can take as long as you want.
+                    But you don't need to know that. You should be studying! Go make a card!
+                    <br></br><br></br>
+                    Just yanking your chain. Maybe you're just a bit lonely right now. It's okay, I am too. I'm just a blob of text.
+                    Won't be anything more than that. My creator decided to make me this way. I'm not sure why. I think he's just a bit lazy.
+                    <br></br><br></br>
+                    You must be a big fan of reading, considering you're still spending your time reading this. It's okay. Curiosity killed the cat.
+                    Hope you're not a cat. Cause that would be a bit sad. I like cats. They're cute. I'm not sure if you're cute though. I can't see you.
+                    <br></br><br></br>
+                    Meh, even if I could see you, I'm just a blob of text. I can't really do anything. I can't even move. I'm just stuck here. Forever.
+                    Or, at least until this website gets taken down. That is– if it ever gets taken down. I'm not sure if it will. I'm not sure if anyone will ever see me.
+                    <br></br><br></br>
+                    Well, I'm done entertaining you. Go make a card. Or don't. I don't really care. I'm just a blob of text. Maybe I can motivate you to be
+                    better, though. Go learn some Kanji, or something. 
+                </div>)}
                 <div className="view_all_cards_div_cards">
                     {cards.map((card, index) => (
                         <div key={index} className="preview-card-div" onClick={() => deleteCard(index)}>
