@@ -54,6 +54,7 @@ function App() {
   const [hiragana, setHiragana] = useState('');
   const [definition, setDefinition] = useState('');
   const [showDefinition, setShowDefinition] = useState(false);
+  // const [showDefinition_PC, setShowDefinition_PC] = useState(false);
 
   // Used for encryption...
   const secretKey = 'santanamurishi';
@@ -66,6 +67,9 @@ function App() {
 
   // Used for Card-Array
   const [cards, setCards] = useState([]);
+
+  // Used for Random-Card-Array
+  const [randomCards, setRandomCards] = useState([]);
 
   // Used for Create-Card
   const [isCreateCardHidden, setIsCreateCardHidden] = useState(true);
@@ -80,6 +84,8 @@ function App() {
     setIsHidden(true);
     // Toggle main div
     setIsMainDivHidden(true);
+    // Toggle practice deck
+    setIsPracticeDeckHidden(true);
   };
   const viewAllCardsStyle = {
     display: isViewAllCardsHidden ? 'none' : 'block',
@@ -93,6 +99,8 @@ function App() {
     setIsHidden(true);
     // Toggle main div
     setIsMainDivHidden(true);
+    // Toggle practice deck
+    setIsPracticeDeckHidden(true);
   };
 
   const createCardStyle = {
@@ -118,6 +126,7 @@ function App() {
     };
 
     setCards([...cards, newCard]);
+    setRandomCards([...randomCards, newCard]);
     setIsHidden(true);
   }
 
@@ -133,13 +142,55 @@ function App() {
     display: isMainDivHidden ? 'none' : 'block',
   };
 
+  // For practice cards
+  const [isPracticeDeckHidden, setIsPracticeDeckHidden] = useState(true);
+  // const [practiceCards, setPracticeCards] = useState([]); 
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+
+  const togglePractice = () => {
+    if (cards.length < 1) {
+      alert('You need to create a card first!');
+      return;
+    }
+    // Create random cards using random cards state and current cards state
+    const randomCards = [...cards];
+    for (let i = randomCards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [randomCards[i], randomCards[j]] = [randomCards[j], randomCards[i]];
+    }
+    setRandomCards(randomCards);
+    
+    // Toggle off Practice-Deck
+    setIsPracticeDeckHidden(!isPracticeDeckHidden);
+    // Toggle off View-All-Cards
+    setIsViewAllCardsHidden(true);
+    // Toggle off Create-Card
+    setIsCreateCardHidden(true);
+    // Toggle off Preview-Card
+    setIsHidden(true);
+    // Toggle main div
+    setIsMainDivHidden(true);
+  };
+
+  const practiceStyle = {
+    display: isPracticeDeckHidden ? 'none' : 'block',
+  };
+
+  const goToPreviousCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+  };
+
+  const goToNextCard = () => {
+    setCurrentCardIndex((prevIndex) => (prevIndex < cards.length - 1 ? prevIndex + 1 : prevIndex));
+  };
+
   const saveCards = () => {
     if (cards.length === 0) {
       alert('The deck is empty. Please add some cards first.');
       return;
     }
 
-    const content = cards.map((card, index) => `${index + 1},${card.kanji},${card.hiragana},${card.definition}`).join('\n');
+    const content = cards.map((card, index) => `${index + 1}•${card.kanji}•${card.hiragana}•${card.definition}`).join('\n');
     const encryptedContent = CryptoJS.AES.encrypt(content, secretKey).toString();
     const blob = new Blob([encryptedContent], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -150,6 +201,15 @@ function App() {
     setTimeout(() => {
       URL.revokeObjectURL(url);
     }, 100);
+  };
+
+  // For viewAllCards
+  const deleteCard = (indexToDelete) => {
+    if (window.confirm("Are you sure you want to delete this card?")) {
+      const updatedCards = cards.filter((_, index) => index !== indexToDelete);
+      setCards(updatedCards);
+      setRandomCards(updatedCards);
+    }
   };
 
   const loadCards = async () => {
@@ -164,10 +224,11 @@ function App() {
         const decryptedContent = CryptoJS.AES.decrypt(encryptedContent, secretKey).toString(CryptoJS.enc.Utf8);
         const lines = decryptedContent.split('\n');
         const newCards = lines.map((line) => {
-          const [_, kanji, hiragana, definition] = line.split(',');
+          const [_, kanji, hiragana, definition] = line.split('•');
           return { kanji, hiragana, definition };
         });
         setCards(newCards);
+        setRandomCards(newCards);
       };
       reader.readAsText(file, 'UTF-8');
     };
@@ -214,12 +275,12 @@ function App() {
               VIEW ALL CARDS
             </div>
 
-            {/* <div className="clickable_button">
+            <div className="clickable_button" onClick={togglePractice}>
               <div className="button_text_JP">
                 練
               </div>
-              TEST DECK
-            </div> */}
+              PRACTICE DECK
+            </div>
 
             <div className="clickable_button" onClick={saveCards}>
               <div className="button_text_JP">
@@ -236,6 +297,43 @@ function App() {
             </div>
 
         </div>
+
+        {cards.length > 0 && (<>
+        <div className="practice-cards-div" style={practiceStyle}>
+          <div className="practice-cards-div-title">
+            PRACTICE CARDS
+          </div>
+          <div className="practice-cards-div-content">
+            Here, you can practice the cards you have created. All cards will be automatically displayed in a random order. You can click on the card to view its
+            definition, and click again to hide it. You can use the back and forward buttons to navigate through the deck.
+          </div>
+
+          <div className="practice-cards-buttons-and-card">
+            <div className="practice-cards-buttons" onClick={goToPreviousCard} disabled={currentCardIndex === 0}>
+              前
+            </div>
+            <div className="preview-card-div-pc" onClick={toggleDefinition}>
+              {showDefinition ? (
+                <div className="card-definition-pc">
+                  {randomCards[currentCardIndex].definition}
+                  </div>
+              ) : (
+                <>
+                  <div className="card-kanji">{randomCards[currentCardIndex].kanji}</div>
+                  <div className="card-hiragana">{randomCards[currentCardIndex].hiragana}</div>
+                  <div className="card-romaji">
+                    {RomajiToKanji(randomCards[currentCardIndex].kanji, randomCards[currentCardIndex].hiragana)}
+                  </div>
+                </>
+              )}
+          </div>
+            <div className="practice-cards-buttons" onClick={goToNextCard} disabled={currentCardIndex === cards.length - 1}>
+              次
+              </div>
+          </div>
+
+        </div>
+        </>)}
 
         <div className="maindiv" style={mainDivStyle}>
           <div className="main-div-title">
@@ -267,7 +365,22 @@ function App() {
                 {/* CREATE CARD */}
               </div>
               {/* <div className="spacer"></div> */}
-              VIEW ALL CARDS allows you to view all the cards that you have created thus far. You can also delete cards from this view, by clicking on a card.
+              VIEW ALL CARDS allows you to view all the cards that you have created thus far. You can modify your entire deck here, and click on cards to delete them.
+              You can see which card you are hovering over as the card display will be darkened.
+
+            </div>
+
+            <div className="main-div-example">
+              <div className="clickable_button_2">
+                <div className="button_text_JP_2">
+                  練
+                </div>
+                {/* CREATE CARD */}
+              </div>
+              {/* <div className="spacer"></div> */}
+              PRACTICE DECK allows you to rotate through the cards in your deck in a random order. It shows the kanji, hiragana, and romaji for each card, and upon
+              clicking the card, it will show the definition. You can click the card again to hide the definition. You can also navigate through the deck using the
+              back and forward buttons.
 
             </div>
 
@@ -349,7 +462,7 @@ function App() {
                 </div>
                 <div className="view_all_cards_div_cards">
                     {cards.map((card, index) => (
-                        <div key={index} className="preview-card-div">
+                        <div key={index} className="preview-card-div" onClick={() => deleteCard(index)}>
                             <div className="card-kanji">{card.kanji}</div>
                             <div className="card-hiragana">{card.hiragana}</div>
                             <div className="card-romaji">{RomajiToKanji(card.kanji, card.hiragana)}</div>
