@@ -415,22 +415,28 @@ function App() {
             CREATE CARD
           </div>
           <div className="input-container">
-            <label htmlFor="kanji-input">Kanji:</label>
-            <input type="text" id="kanji-input" name="kanji" placeholder="Kanji" />
-            <label htmlFor="hiragana-input">Hiragana:</label>
-            <input type="text" id="hiragana-input" name="hiragana" placeholder="Hiragana" />
-            <label htmlFor="definition-input">Definition:</label>
-            <input type="text" id="definition-input" name="definition" placeholder="Definition" />
+            <div className="input-container-subsection">
+              <label htmlFor="kanji-input">Kanji:</label>
+              <input type="text" id="kanji-input" name="kanji" placeholder="Kanji" />
+            </div>
+            <div className="input-container-subsection">
+              <label htmlFor="hiragana-input">Hiragana:</label>
+              <input type="text" id="hiragana-input" name="hiragana" placeholder="Hiragana" />
+            </div>
+            <div className="input-container-subsection">
+              <label htmlFor="definition-input">Definition:</label>
+              <input type="text" id="definition-input" name="definition" placeholder="Definition" />
+            </div>
           </div>
           <div className="buttons-container">
-            <button className="clickable_button" onClick={previewCard}>
-              <div className="button_text_JP">
+            <button className="clickable_button" id="prev_card" onClick={previewCard}>
+              <div className="button_text_JP" id="prev_card_JP">
                 試
               </div>
               Preview Card
             </button>
-            <button className="clickable_button" onClick={createCard}>
-              <div className="button_text_JP">
+            <button className="clickable_button" id="create_card" onClick={createCard}>
+              <div className="button_text_JP" id="create_card_JP">
                 作
               </div>
               Create Card
