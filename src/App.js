@@ -45,7 +45,16 @@ class Card {
       return wanakana.toRomaji(hiraganaPart.join('')).toUpperCase();
     });
 
-    return romajiParts.join('').slice(0, -1);
+    if (romajiParts[romajiParts.length - 1] === '.') {
+      romajiParts[romajiParts.length - 1] = '';
+    }
+
+    let rmj = romajiParts.join('');
+    if (rmj[rmj.length - 1] === '•') {
+      rmj = rmj.slice(0, -1);
+    }
+
+    return rmj;
   }
 }
 
@@ -252,7 +261,17 @@ function App() {
       return wanakana.toRomaji(hiraganaPart.join('')).toUpperCase();
     });
 
-    return romajiParts.join('').slice(0, -1);
+    if (romajiParts[romajiParts.length - 1] === '.') {
+      romajiParts[romajiParts.length - 1] = '';
+    }
+
+    let rmj = romajiParts.join('');
+    if (rmj[rmj.length - 1] === '•') {
+      rmj = rmj.slice(0, -1);
+    }
+
+    return rmj;
+
   };
 
   return (
